@@ -3,7 +3,7 @@
 # Check if an argument was provided
 if [ -z "$1" ]; then
   echo "Please provide an element as an argument."
-  exit 1  # Exit the script if no argument is provided
+  exit 0  # Exit the script if no argument is provided
 fi
 
 # Query the database based on the argument type (atomic number, symbol, or name)
@@ -21,13 +21,13 @@ elif [[ "$1" =~ ^[A-Za-z]+$ ]]; then
                                         WHERE e.symbol = '$1' OR e.name = '$1' LIMIT 1;")
 else
   echo "I could not find that element in the database."
-  exit 1
+  exit 0
 fi
 
 # Check if an element was found
 if [ -z "$element" ]; then
   echo "I could not find that element in the database."
-  exit 1
+  exit 0
 fi
 
 # Parsing the result and assigning values to variables
